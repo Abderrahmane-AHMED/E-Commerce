@@ -111,7 +111,7 @@ The application was deployed using Web Deploy from Visual Studio for hosting and
 
 A short demonstration video of the application is available on LinkedIn:
 
-🔗 [Watch the demo on LinkedIn](PUT_YOUR_LINK_HERE)
+🔗 [![Watch the Demo](https://img.shields.io/badge/-Watch-blue?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/posts/abderrahmane-ahmed-69436438a_aspnetcore-dotnet-backend-activity-7432124513653260288-iHYO?utm_source=share&utm_medium=member_desktop&rcm=ACoAAF_OCNABFBzIiLvo8ginXAVDM0vLth3w7cc)
 
 The video presents:
 - Authentication workflow
