@@ -1,0 +1,198 @@
+﻿@model VmItemDetails
+
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h4><a href="#RelatedProducts">@ResAdmin.lblRelatedProducts</a></h4>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">@ResGeneral.lblHome</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+<!-- Product details start -->
+<section class="product-section">
+    <div class="container">
+        <div class="row d-flex align-items-start">
+
+            <!-- الصور المصغرة -->
+            <div class="col-lg-1 col-2">
+                <div class="product-thumbnails">
+                    @for (int i = 0; i < Model.lstItemImages.Count; i++)
+                    {
+                        var item = Model.lstItemImages[i];
+                        <div class="thumb mb-2">
+                            <img src="@Url.Content("~/Uploads/Items/" + item.ImageName)"
+                                 class="img-fluid border rounded thumb-img"
+                                 data-index="@i"
+                                 alt="Thumbnail" />
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- الصورة الرئيسية -->
+            <div class="col-lg-5 col-10">
+                <div class="products">
+                    <img id="mainImage"
+                         src="@Url.Content("~/Uploads/Items/" + Model.lstItemImages.FirstOrDefault()?.ImageName)"
+                         class="zoom-inner-image img-fluid"
+                         alt="Main Image" />
+                </div>
+            </div>
+
+            <!-- تفاصيل المنتج -->
+            <div class="col-lg-6 col-12">
+                <div class="products">
+                    <div class="product-details">
+                        <h2 class="product-title">@Model.Item.ItemName</h2>
+                        <div class="border-top pt-2 mt-2">
+                            <h6 class="text-muted">@ResAdmin.lblDescription</h6>
+                            <p class="description-text">@Model.Item.Description</p>
+                        </div>
+                        <div class="border-top pt-2 mt-2">
+                            <h6 class="text-success">100% @ResAdmin.lblOriginal</h6>
+                            <button class="btn btn-primary mt-3"
+                                    data-id="@Model.Item.ItemId"
+                                    data-title="@Model.Item.ItemName"
+                                    data-price="@Model.Item.SalesPrice">
+                                Add To Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Product details end -->
+<!-- Product tabs start -->
+<section class="tab-product m-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="review-top-tab" data-toggle="tab" href="#top-review" role="tab">@ResAdmin.lblWriteReview</a>
+                        <div class="material-border"></div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-top-tab" data-toggle="tab" href="#top-contact" role="tab">@ResAdmin.lblVideo</a>
+                        <div class="material-border"></div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-top-tab" data-toggle="tab" href="#top-profile" role="tab">@ResAdmin.lblDescription</a>
+                        <div class="material-border"></div>
+                    </li>
+
+                </ul>
+
+                <div class="tab-content nav-material" id="top-tabContent">
+                    <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
+                        <form class="theme-form">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="media">
+                                        <label>@ResAdmin.lblRating</label>
+                                        <div class="media-body ml-3">
+                                            <div class="rating three-star">
+                                                <i class="fa fa-star" style="color: #ffcc00;"></i>
+                                                <i class="fa fa-star" style="color: #ffcc00;"></i>
+                                                <i class="fa fa-star" style="color: #ffcc00;"></i>
+                                                <i class="fa fa-star" style="color: #ffcc00;"></i>
+                                                <i class="fa fa-star" style="color: #ccc;"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="name">@ResAdmin.lblName</label>
+                                    <input type="text" class="form-control" id="name" placeholder="@ResAdmin.lblEnterYourname" required />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email">@ResAdmin.lblEmail</label>
+                                    <input type="text" class="form-control" id="email" placeholder="@ResAdmin.lblEmail" required />
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="review">@ResAdmin.lblReviewTitle</label>
+                                    <input type="text" class="form-control" id="review" placeholder="@ResAdmin.lblEnterYourReviewSubjects" required />
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="exampleFormControlTextarea1">@ResAdmin.lblReviewTitle</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" placeholder="@ResAdmin.lblWrireYourTestimonialHere"></textarea>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary" type="submit">@ResAdmin.lblSubmitYourReview</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
+                        <div class="col-md-12 text-center">
+                            <iframe width="260" height="215" src="https://www.youtube.com/embed/BUWzX78Ye_8"
+                                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
+                        <div class="single-product-tables">
+                            <p class="mt-3">@Model.Item.Description</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div
+        </div>
+    </div>
+</section>
+<!-- Product tabs end -->
+<!-- Related products start -->
+<section class="section-b-space ratio_asos">
+    <div class="container">
+        <div class="row text-left">
+            <div class="col-12">
+                <div class="section-header-box">
+                    <h5 id="RelatedProducts">@ResAdmin.lblRelatedProducts</h5>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            @foreach (var item in Model.lstRecommendedItems)
+            {
+                <div class="col-lg-3 col-md-4 col-12 mb-4">
+                    <div class="product-card">
+                        <div class="product-box">
+                            <partial name="ItemBox" model="@item" />
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+      
+    </div>
+</section>
+<!-- Related products end -->
+@section Scripts
+{
+    <!-- Zoom js-->
+    <script src="~/Fontend/js/jquery.elevatezoom.js"></script>
+    <script src="~/Fontend/js/ItemsDetails.js"></script>
+    <script src="~/Fontend/js/script.js"></script>
+}

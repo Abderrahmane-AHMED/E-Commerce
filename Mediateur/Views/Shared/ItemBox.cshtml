@@ -1,0 +1,34 @@
+﻿
+
+@model VwItem
+
+<div class="img-wrapper">
+    <div class="front">
+        <a asp-controller="Items" asp-action="ItemDetails" asp-route-id="@Model.ItemId">
+            <img class="img-fluid blur-up lazyload" src="/Uploads/Items/@Model.ImageName" alt="@Model.ItemName">
+        </a>
+    </div>
+
+</div>
+<div class="products">
+
+    <a href="product-title">
+        <h6>@Model.ItemName</h6>
+    </a>
+    <div class="rating">
+        <i class="fa fa-star" style="color: #ffcc00;"></i>
+        <i class="fa fa-star" style="color: #ffcc00;"></i>
+        <i class="fa fa-star" style="color: #ffcc00;"></i>
+        <i class="fa fa-star" style="color: #ffcc00;"></i>
+        <i class="fa fa-star" style="color: #ccc;"></i>
+    </div>
+
+    <h4>$@Model.SalesPrice</h4>
+
+<button class="buttons"
+        data-id="@Model.ItemId"
+        data-title="@Model.ItemName"
+        data-price="@Model.SalesPrice">
+    Add To Cart
+</button>
+</div>

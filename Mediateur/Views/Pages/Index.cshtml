@@ -1,0 +1,18 @@
+﻿@model TbPages
+
+<section class="about-page section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="banner-section">
+                    <img src="~/Uploads/Pages/@Model.ImageName"
+                         class="img-fluid blur-up lazyload" alt="">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h4>@Model.Title</h4>
+                <p>@Html.Raw(Model.Description)</p>
+            </div>
+        </div>
+    </div>
+</section>

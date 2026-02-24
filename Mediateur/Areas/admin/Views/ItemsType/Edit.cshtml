@@ -1,0 +1,76 @@
+﻿@model TbItemType
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title"> Form elements </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Items Type</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-8 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Default form</h4>
+                    <p class="card-description"> Basic form layout </p>
+                    <form class="forms-sample" method="post" enctype="multipart/form-data"
+                          asp-controller="ItemsType" asp-action="Save" role="form">
+                        <input asp-for="ItemTypeId" type="hidden" />
+                        <input asp-for="CreatedBy" type="hidden" />
+                        <input asp-for="CreatedDate" type="hidden" />
+                        <input asp-for="ImageName" type="hidden" id="ImageNameHidden" />
+
+                        <div class="form-group">
+                            <label>@ResAdmin.lblItemTypeName</label>
+                            <input asp-for="ItemTypeName" type="text" class="form-control" placeholder="ItemType Name">
+                            <span asp-validation-for="ItemTypeName"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>@ResAdmin.lblImage</label>
+                            <input type="file" name="Files" class="form-control"
+                                   onchange="Upload.UploadDefaultImg(event)" accept=".jpg, .jpeg, .png, .gif">
+                        </div>
+
+                        <button type="submit" class="btn btn-gradient-primary me-2">@ResGeneral.lblSave</button>
+                        <button class="btn btn-light">@ResGeneral.lblNew</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <span id="tbImgName"></span>
+                    <div id="tbImgSrc">
+                        <img id="previewImg" src="/Uploads/ItemsType/@Model.ImageName"
+                             style="width:95%; height:300px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        var Upload = {
+            UploadDefaultImg: function (e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function () {
+                        document.getElementById("previewImg").src = reader.result;
+                        document.getElementById("tbImgName").innerText = file.name;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        };
+    </script>
+}

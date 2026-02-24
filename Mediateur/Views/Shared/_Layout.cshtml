@@ -1,0 +1,227 @@
+﻿@inject SignInManager<ApplicationUser> sinInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+
+    <title>Multikart - Multi-purpopse E-commerce Html Template</title>
+
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+
+
+
+    <!-- Icons -->
+    <link rel="stylesheet" type="text/css" href="~/Fontend/css/fontawesome.css">
+
+    <!--Slick slider css-->
+    <link rel="stylesheet" type="text/css" href="~/Fontend/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/Fontend/css/slick-theme.css">
+
+
+    <!-- Themify icon -->
+    <link rel="stylesheet" type="text/css" href="~/Fontend/css/themify-icons.css">
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="~/Fontend/css/bootstrap.css">
+
+    <!-- Theme css -->
+    <link rel="stylesheet" type="text/css" href="~/Fontend/css/style.css" media="screen" id="color">
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <!-- header start -->
+    <header class="site-header">
+    <div class="header-top-bar">
+            <div class="container header-top-content">
+                 <div class="site-notification">
+                    @ResGeneral.lblMessage
+                </div>
+                <div class="header-account">               
+                        <span class="account-title">My Account</span>
+                        <ul>
+                     
+                            @if (sinInManager.IsSignedIn(User))
+                            {
+                              
+                            <li><a asp-controller="Users" asp-action="LogOut">Logout</a></li>
+                            }
+                            else
+                            {
+                            <li><a asp-controller="Users" asp-action="Login">Login</a></li>
+                            } 
+                        </ul>                    
+                </div>
+            </div>
+        </div>  
+    <div class="header-main-bar">
+            <div class="container header-main-content">
+                <a href="#" class="site-logo">
+                    <img src="~/Fontend/image/mp100.png" alt="Logo" />
+                </a>
+                <nav class="main-nav">
+                    <ul class="main-nav-list">
+                        <li class="mobile-home-toggle">
+                            <div class="submenu">
+                                <span>
+                                <i class="fa fa-home"></i> 
+                                </span>
+                            <ul>
+                                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li><a asp-controller="Home" asp-action="Index">Product</a></li>
+                                <li><a href="#InformationUs">Contact Us</a></li>
+                                <li><a asp-controller="Pages" asp-action="Index" asp-route-pageId="10">@ResGeneral.lblAboutUs</a></li>
+                                <li><a asp-controller="Items" asp-action="ApiItemList">Api Items List</a></li>
+
+                            </ul>
+                            </div>
+                        </li>
+                        <li class ="desktop-menu"><a class="active" asp-controller="Home" asp-action="Index">@ResGeneral.lblHome</a></li>
+                        <li class="desktop-menu"><a asp-controller="Home" asp-action="Index">@ResAdmin.lblProduct</a></li>
+                        <li class="desktop-menu"><a href="#InformationUs">@ResGeneral.lblContactUs</a></li>
+                        <li class="desktop-menu"><a asp-controller="Pages" asp-action="Index" asp-route-pageId="10">@ResGeneral.lblAboutUs</a></li>
+                        <li class="desktop-menu"><a asp-controller="Items" asp-action="ApiItemList">Api Items List</a></li>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Data Entry"))
+                        {
+                            <li class="desktop-menu"><a asp-area="admin" asp-controller="Home" asp-action="Index">@ResGeneral.lblDashboard</a></li>
+                        }
+
+                    </ul>
+                </nav> 
+            </div>
+        </div>
+    </header>
+
+    <!-- Product Cart start -->
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div id="cart" class="cart">
+            <div class="cart-header">
+                <h3>Cart Products</h3>
+                <button id="close-cart" class="close-btn btn">Close</button>
+            </div>
+            <ul id="cart-items" class="cart-items"></ul>
+            <p class="total-amount">Total:<span class="total-money">$<span id="cart-total">0.00</span></span> </p>
+            <div class="book-via-btn">
+                <a id="whatsappCartBtn" href="#" class="whatsapp-btn btn">Book via Whats</a>
+                <a id="emailCartBtn" href="#" class="email-btn btn">Book via Email</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Cart end -->
+
+    <!-- header end -->
+
+
+    @RenderBody()
+
+    <!-- footer start -->
+    
+    <footer class="footer-wrapper">
+         <div class="footer-main-section">
+          <div class="container">
+                <div class="footer-columns-container">
+                     <div class="footer-column">
+                        <div class="footer-logo"><img src="~/Fontend/image/mt-removebg-preview.png" alt="Logo" /></div>
+                        <p>@ResAdmin.lblMessageUs</p>
+                        <div class="footer-social">
+                            <a id="lnkFacebook"><i class="fa fa-facebook"></i></a>
+                            <a id="lnkGooglePlus"><i class="fa fa-google-plus"></i></a>
+                            <a id="lnkTwitter"><i class="fa-brands fa-twitter"></i></a>
+                            <a id="lnkInstagram"><i class="fa fa-instagram"></i></a>                 
+                        </div>
+
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>@ResAdmin.lblCategoryName</h4>
+                        <ul>
+                            <li><a asp-controller="Home" asp-action="Index">@ResGeneral.lblHome</a></li>
+                            <li><a asp-controller="Home" asp-action="Index">@ResAdmin.lblProduct</a></li>
+                            <li><a asp-controller="Pages" asp-action="Index" asp-route-pageId="11">@ResAdmin.lblFAQ</a></li>
+                            <li><a asp-controller="Pages" asp-action="Index" asp-route-pageId="10">@ResGeneral.lblAboutUs</a></li>
+                        </ul>
+                    </div>
+               
+                    <div class="footer-column">
+                        <h4 id="InformationUs">@ResGeneral.lblInformationUs</h4>
+                        <ul class="contact-info">
+                            <li>
+                                <a href="https://www.google.com/maps/dir/?api=1&destination=259+rue+des+châtaigniers+44150+ANCENIS+France" target="_blank" id="#">
+                                    <i class="fa fa-map-marker"></i> <span class="hide-mobile">259 Rue Des Chataignires, ANCENIS 44150</span>
+                                </a>
+                            </li>
+                               
+                            <li>
+                                <a href="tel:0033775746969" rel="noopener noreferrer">
+                                <i class="fa fa-phone"></i><span class="hide-mobile"> 07 58 27 87 28</span> 
+                                </a>
+                                </li>
+                            <li>
+                                <a href="#" id="whatsappLink" target="_blank">
+                                    <i class="fa fa-whatsapp"></i><span class="hide-mobile">07 75 74 69 69</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" id="emailLink">
+                                    <i class="fa fa-envelope-o"></i><span class="hide-mobile">abderrahmaneahmed124@gmail.com</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="footer-bottom-bar">
+            <div class="container">
+                <p>&copy; 2024-25 @ResAdmin.lblMediateur</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- footer end -->
+    <!-- Load jQuery First -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+    <!-- latest jquery-->
+    @*    <script src="~/Fontend/js/jquery-3.3.1.min.js"></script> *@
+
+    <!-- fly cart ui jquery-->
+    <script src="~/Fontend/js/jquery-ui.min.js"></script>
+
+    <!-- elevatezoom jquery-->
+    <script src="~/Fontend/js/jquery.elevatezoom.js"></script>
+
+    <!-- exitintent jquery-->
+    <script src="~/Fontend/js/jquery.exitintent.js"></script>
+
+    <!-- slick js-->
+    <script src="~/Fontend/js/slick.js"></script>
+
+    <!-- script js-->
+    <script src="~/Fontend/js/script.js"></script>
+
+    <!-- Bootstrap js-->
+    <script src="~/Fontend/js/bootstrap.js"></script>
+
+    <!-- Bootstrap Notification js-->
+    <script src="~/Fontend/js/bootstrap-notify.min.js"></script>
+
+    <script src="~/modules/helper.js"></script>
+    <script src="~/modules/settings.js"></script>
+
+</body>
+</html>

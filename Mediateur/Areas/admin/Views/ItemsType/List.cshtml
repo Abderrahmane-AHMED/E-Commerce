@@ -1,0 +1,60 @@
+﻿@model List<TbItemType>
+
+<div class="container-fluid page-body-wrapper">
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h3 class="page-title">@ResAdmin.DataTableItemsType</h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Items Type</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">@ResAdmin.DataTableItemsType</h4>
+                    <div class="row">
+                        <div class="col-12">
+                            <a asp-controller="ItemsType" asp-action="Edit" asp-route-itemsTypeId="" class="btn btn-success btn-fw">New</a>
+
+                            <table id="order-listing" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>@ResAdmin.lblItemType</th>
+                                        <th>@ResGeneral.lblAction</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var itemT in Model)
+                                    {
+                                        <tr>
+                                            <td class="col-md-8">@itemT.ItemTypeName</td>
+                                            <td class="col-md-4">
+                                                <a asp-controller="ItemsType" asp-action="Edit" asp-route-itemsTypeId="@itemT.ItemTypeId"
+                                                   class="btn btn-info btn-fw">@ResGeneral.lblEdit</a>
+
+                                                <a asp-controller="ItemsType" asp-action="Delete" asp-route-itemsTypeId="@itemT.ItemTypeId"
+                                                   class="btn btn-danger btn-fw"
+                                                   onclick="return confirm('هل أنت متأكد من الحذف؟');">@ResGeneral.lblDelete</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/Admin/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/Admin/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="~/Admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script src="~/Admin/js/data-table.js"></script>
+}

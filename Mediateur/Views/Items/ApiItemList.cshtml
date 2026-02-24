@@ -1,0 +1,18 @@
+﻿@model List<Mediateur.Models.TbItem>
+
+
+<div class="data">
+    <div id="product-list" class="products">
+                @foreach (var item in Model)
+                {
+                    <div class="product-card">
+                        <img src="@(item.ImageName != null ? "/Uploads/Items/" + item.ImageName : "/images/no-image.png")" class="card-img-top" />
+                        <div class="card-body">
+                            <h6 class="card-title">@item.ItemName</h6>
+                            <p class="card-text">السعر: $@item.SalesPrice</p>
+                        </div>
+                    </div>
+                }
+     </div>
+ </div>
+  

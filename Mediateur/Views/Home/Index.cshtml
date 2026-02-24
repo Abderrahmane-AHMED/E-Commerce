@@ -1,0 +1,130 @@
+﻿@model VmHomePage
+@{
+    ViewData["Title"] = "Home - Index";
+}
+
+<!-- collection banner -->
+<div class="container">
+   <nav><ul id="navbar"></ul></nav>
+
+    <!-- Paragraph-->
+        <div class="title1 section-t-space">
+        <div class="title-two">@ResAdmin.lbllaptop</div>
+        <div class="description">@ResAdmin.lblMessageUs</div>
+
+    </div>
+    <!-- Paragraph end -->
+
+    <!-- data js end -->
+   <div class="data">
+       <div id="product-list" class="products">
+          <a asp-controller="Items" asp-action="ItemDetails" asp-route-id="id">
+             <img />
+          </a>
+       </div>
+  </div>
+    <!-- data js end -->
+</div>
+     
+@section Scripts {
+    <script src="~/Fontend/js/cart.js"></script>
+}
+
+<!-- collection banner end -->
+
+<!-- product section start -->
+<section class="tools_product bg-title section-b-space">
+    <div class="container">
+        <div class="row multiple-slider">
+            <!-- Recommendations  -->
+            <div class="col-xl-4 col-lg-4 col-md-12">
+                <div class="product-recommend">
+                    <div class="section-header-box">
+                        <h5>@ResAdmin.lblRecommendationsForYou</h5>
+                    </div>
+
+                    <div class="products-freeDelivry">
+                        <div>
+                            @foreach (var item in Model.lstFreeDelivry)
+                            {
+                                <div class="product-card">
+                                    <a asp-controller="Items" asp-action="ItemDetails" asp-route-id="@item.ItemId">
+                                        <img class="" src="/Uploads/Items/@item.ImageName" alt="@item.ItemName">
+                                    </a>
+                                 
+                                    <div class="media-body align-self-center">
+                                        <a href="product-page(no-sidebar).html"><h5>@item.ItemName</h5></a>
+                                        <i class="fa fa-star" style="color: #ffcc00;"></i>
+                                        <i class="fa fa-star" style="color: #ffcc00;"></i>
+                                        <i class="fa fa-star" style="color: #ffcc00;"></i>
+                                        <i class="fa fa-star" style="color: #ffcc00;"></i>
+                                        <i class="fa fa-star" style="color: #ccc;"></i>
+                                       
+                                        <h6>$@item.SalesPrice</h6>
+                                       
+                                        <button class="buttons"
+                                                data-id="@item.ItemId"
+                                                data-title="@item.ItemName"
+                                                data-price="@item.SalesPrice">
+                                            Add To Cart
+                                        </button>
+
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Products  -->
+           <div class="col-xl-8 col-lg-8 col-md-12">
+                <div class="theme-tab">
+                  
+                        <div class="section-header-box">
+                            <h5>@ResAdmin.lblNowProducts</h5>
+                        </div>
+
+                    <div class="products">
+                        <div id="" class="product-card">
+                            <div class="product-slick-slider">
+                                @foreach (var item in Model.lstRecommendedItems)
+                                {
+                                    <div class="product">
+                                        <a asp-controller="Items" asp-action="ItemDetails" asp-route-id="@item.ItemId">
+                                            <img class="" src="/Uploads/Items/@item.ImageName" alt="@item.ItemName">
+                                        </a>
+
+                                        <div class="media-body align-self-center">
+                                            <a href="product-page(no-sidebar).html"><h5>@item.ItemName</h5></a>
+                                            <i class="fa fa-star" style="color: #ffcc00;"></i>
+                                            <i class="fa fa-star" style="color: #ffcc00;"></i>
+                                            <i class="fa fa-star" style="color: #ffcc00;"></i>
+                                            <i class="fa fa-star" style="color: #ffcc00;"></i>
+                                            <i class="fa fa-star" style="color: #ccc;"></i>
+
+                                            <h6>$@item.SalesPrice</h6>
+
+                                            <button class="buttons"
+                                                    data-id="@item.ItemId"
+                                                    data-title="@item.ItemName"
+                                                    data-price="@item.SalesPrice">
+                                                Add To Cart
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="banner-tools mt-3">
+                        <img src="~/Fontend/image/28.jpg" alt="Banner" class="img-fluid" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- product section end -->
